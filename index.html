@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Trainer | Master Your Security</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="background-glow"></div>
+
+    <main class="container">
+        <header>
+            <div class="logo">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h1>Pwd<span class="highlight">Trainer</span></h1>
+            </div>
+            <p class="subtitle">Build muscle memory for your strongest passwords.</p>
+        </header>
+
+        <section class="card setup-section">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-bullseye"></i> Target Password</h2>
+                <span class="status-badge" id="target-status">Not Set</span>
+            </div>
+            <div class="input-group">
+                <input type="password" id="target-password" placeholder="Enter the password to memorize...">
+                <button class="icon-btn toggle-visibility" data-for="target-password" title="Show/Hide">
+                    <i class="fa-regular fa-eye"></i>
+                </button>
+                <button id="set-target-btn" class="primary-btn">
+                    Set Target
+                </button>
+            </div>
+        </section>
+
+        <section class="card practice-section disabled" id="practice-section">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-keyboard"></i> Practice Arena</h2>
+                <div class="timer" id="timer">0.00s</div>
+            </div>
+            <div class="input-group">
+                <input type="password" id="practice-input" placeholder="Type fast and press Enter..." disabled>
+                <button class="icon-btn toggle-visibility" data-for="practice-input" title="Show/Hide">
+                    <i class="fa-regular fa-eye"></i>
+                </button>
+            </div>
+            <div class="feedback-message" id="feedback-message"></div>
+        </section>
+
+        <section class="card history-section">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-clock-rotate-left"></i> Attempt History</h2>
+                <button id="clear-history-btn" class="text-btn">Clear</button>
+            </div>
+            <div class="table-header">
+                <span>Result</span>
+                <span>Time</span>
+                <span>Input</span>
+            </div>
+            <ul id="attempts-list" class="attempts-list">
+                <!-- Attempts will be added here -->
+                <li class="empty-state">No attempts yet. Start practicing!</li>
+            </ul>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

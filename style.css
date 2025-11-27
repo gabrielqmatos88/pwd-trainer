@@ -44,7 +44,7 @@ body {
 
 .container {
     width: 100%;
-    max-width: 600px;
+    max-width: 1000px;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -82,6 +82,26 @@ header {
 .subtitle {
     color: var(--text-muted);
     font-size: 1.1rem;
+}
+
+/* Layout Grid */
+.layout-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.column-main {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.column-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
 /* Cards */
@@ -128,6 +148,15 @@ header {
     position: relative;
 }
 
+.vertical-group {
+    flex-direction: column;
+}
+
+.input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
 input {
     flex: 1;
     background: rgba(15, 23, 42, 0.6);
@@ -136,7 +165,6 @@ input {
     padding: 0.875rem 1rem;
     color: var(--text-main);
     font-family: 'Courier New', Courier, monospace;
-    /* Monospace for passwords */
     font-size: 1rem;
     transition: all 0.2s ease;
     width: 100%;
@@ -168,6 +196,12 @@ button {
     font-weight: 600;
     font-size: 0.95rem;
     white-space: nowrap;
+    height: 46px;
+    /* Fixed height for consistency */
+}
+
+.primary-btn.full-width {
+    width: 100%;
 }
 
 .primary-btn:hover {
@@ -185,22 +219,10 @@ button {
     padding: 0 0.5rem;
     font-size: 1.1rem;
     position: absolute;
-    right: 120px;
-    /* Adjust based on layout */
+    right: 1rem;
     top: 50%;
     transform: translateY(-50%);
     z-index: 2;
-}
-
-/* Special positioning for setup input which has a button next to it */
-.setup-section .icon-btn {
-    right: calc(1.5rem + 100px + 0.75rem);
-    /* Button width + gap + padding */
-}
-
-/* Special positioning for practice input which has no button next to it */
-.practice-section .icon-btn {
-    right: 1rem;
 }
 
 .icon-btn:hover {
@@ -388,17 +410,17 @@ button {
 }
 
 /* Mobile adjustments */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
+    .layout-grid {
+        grid-template-columns: 1fr;
+    }
+
     .container {
         padding: 1rem;
     }
 
     .primary-btn {
         padding: 0 1rem;
-    }
-
-    .setup-section .icon-btn {
-        right: calc(1rem + 80px + 0.5rem);
     }
 
     .table-header,

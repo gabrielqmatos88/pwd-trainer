@@ -51,6 +51,12 @@ document.addEventListener('DOMContentLoaded', () => {
         showFeedback('Target password set! Start practicing.', 'success');
     });
 
+    targetInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            setTargetBtn.click();
+        }
+    });
+
     // --- Visibility Toggles ---
 
     toggleBtns.forEach(btn => {

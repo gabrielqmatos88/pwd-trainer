@@ -44,7 +44,7 @@ body {
 
 .container {
     width: 100%;
-    max-width: 1000px;
+    max-width: 90%;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -87,21 +87,26 @@ header {
 /* Layout Grid */
 .layout-grid {
     display: grid;
-    grid-template-columns: 1fr 320px;
+    grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
     align-items: start;
 }
 
-.column-main {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+/* Grid Spans */
+.practice-section {
+    grid-column: span 3;
 }
 
-.column-sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+.setup-section {
+    grid-column: span 1;
+}
+
+.history-section {
+    grid-column: span 2;
+}
+
+.charts-section {
+    grid-column: span 2;
 }
 
 /* Cards */
@@ -446,6 +451,13 @@ button {
 @media (max-width: 768px) {
     .layout-grid {
         grid-template-columns: 1fr;
+    }
+
+    .practice-section,
+    .setup-section,
+    .history-section,
+    .charts-section {
+        grid-column: span 1;
     }
 
     .container {

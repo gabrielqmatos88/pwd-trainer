@@ -428,3 +428,22 @@ button {
         grid-template-columns: 60px 80px 1fr;
     }
 }
+
+/* Caps Lock Indicator */
+.caps-indicator {
+    font-size: 0.7rem;
+    background-color: var(--error);
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    margin-left: 0.5rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    vertical-align: middle;
+    transition: opacity 0.2s ease;
+}
+
+.caps-indicator.hidden {
+    opacity: 0;
+    pointer-events: none;
+}

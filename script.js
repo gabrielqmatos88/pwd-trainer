@@ -64,6 +64,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // --- Caps Lock Detection ---
+    const capsLockIndicator = document.getElementById('caps-lock-indicator');
+
+    function updateCapsLockState(e) {
+        if (e.getModifierState && e.getModifierState("CapsLock")) {
+            capsLockIndicator.classList.remove('hidden');
+        } else if (e.getModifierState) {
+            capsLockIndicator.classList.add('hidden');
+        }
+    }
+
+    document.addEventListener('keydown', updateCapsLockState);
+    document.addEventListener('keyup', updateCapsLockState);
+    document.addEventListener('click', updateCapsLockState);
+    practiceInput.addEventListener('focus', updateCapsLockState);
+
     // --- Practice Section ---
 
     practiceInput.addEventListener('input', (e) => {

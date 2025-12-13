@@ -313,7 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
             labels: [],
             datasets: [
                 {
-                    label: 'Duration (s)',
+                    label: 'Duration (ms)',
                     data: [],
                     borderColor: '#6366f1',
                     backgroundColor: 'rgba(99, 102, 241, 0.1)',
@@ -362,7 +362,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Update Time Trend Chart
         const labels = attempts.map((_, index) => `Attempt ${index + 1}`);
-        const durations = attempts.map(a => a.duration);
+        const durations = attempts.map(a => a.duration * 1000);
 
         // Calculate average
         const totalDuration = durations.reduce((sum, d) => sum + d, 0);

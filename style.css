@@ -447,3 +447,23 @@ button {
     opacity: 0;
     pointer-events: none;
 }
+
+/* Best Time Display */
+.history-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.best-time {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.best-time span {
+    color: #fbbf24;
+    /* Amber-400 */
+    font-weight: 700;
+    font-family: 'Courier New', Courier, monospace;
+}

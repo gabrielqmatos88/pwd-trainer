@@ -29,7 +29,8 @@
             <div class="column-main">
                 <section class="card practice-section disabled" id="practice-section">
                     <div class="section-header">
-                        <h2><i class="fa-solid fa-keyboard"></i> Practice Arena <span id="caps-lock-indicator" class="caps-indicator hidden">CAPS LOCK ON</span></h2>
+                        <h2><i class="fa-solid fa-keyboard"></i> Practice Arena <span id="caps-lock-indicator"
+                                class="caps-indicator hidden">CAPS LOCK ON</span></h2>
                         <div class="timer" id="timer">0.00s</div>
                     </div>
                     <div class="input-group">
@@ -44,7 +45,10 @@
                 <section class="card history-section">
                     <div class="section-header">
                         <h2><i class="fa-solid fa-clock-rotate-left"></i> Attempt History</h2>
-                        <button id="clear-history-btn" class="text-btn">Clear</button>
+                        <div class="history-controls">
+                            <div class="best-time">Best: <span id="best-time-display">--</span></div>
+                            <button id="clear-history-btn" class="text-btn">Clear</button>
+                        </div>
                     </div>
                     <div class="table-header">
                         <span>Result</span>

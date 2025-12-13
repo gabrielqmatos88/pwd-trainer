@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const attemptsList = document.getElementById('attempts-list');
     const clearHistoryBtn = document.getElementById('clear-history-btn');
+    const bestTimeDisplay = document.getElementById('best-time-display');
+
+    let bestTime = Infinity;
 
     // --- Setup Section ---
 
@@ -132,6 +135,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // Feedback
         if (isCorrect) {
             showFeedback(`Correct! Time: ${duration.toFixed(2)}s`, 'success');
+
+            // Update Best Time
+            if (duration < bestTime) {
+                bestTime = duration;
+                bestTimeDisplay.textContent = bestTime.toFixed(2) + 's';
+                // Optional: Add a "New Record!" effect here if desired
+            }
         } else {
             showFeedback('Incorrect password. Try again.', 'error');
         }
@@ -214,6 +224,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     clearHistoryBtn.addEventListener('click', () => {
         attemptsList.innerHTML = '<li class="empty-state">No attempts yet. Start practicing!</li>';
+        bestTime = Infinity;
+        bestTimeDisplay.textContent = '--';
     });
 
     // Utility to prevent XSS in history

@@ -500,3 +500,20 @@ button {
     font-weight: 700;
     font-family: 'Courier New', Courier, monospace;
 }
+
+/* Charts Section */
+.charts-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.chart-container {
+    position: relative;
+    height: 200px;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 1rem;
+    border: 1px solid var(--card-border);
+}

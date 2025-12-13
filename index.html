@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -95,6 +96,18 @@
                         <button id="set-target-btn" class="primary-btn full-width">
                             Set Target
                         </button>
+                    </div>
+                </section>
+
+                <section class="card charts-section">
+                    <div class="section-header">
+                        <h2><i class="fa-solid fa-chart-pie"></i> Statistics</h2>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="passFailChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="timeTrendChart"></canvas>
                     </div>
                 </section>
             </div>

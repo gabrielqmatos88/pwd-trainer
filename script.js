@@ -137,6 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         attempts.push({ duration, isCorrect });
         updateStats();
+        updateCharts();
 
         addAttemptToHistory(attemptText, duration, isCorrect);
 
@@ -236,6 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
         bestTimeDisplay.textContent = '--';
         attempts = [];
         updateStats();
+        updateCharts();
     });
 
     function updateStats() {
@@ -269,5 +271,101 @@ document.addEventListener('DOMContentLoaded', () => {
         const div = document.createElement('div');
         div.textContent = text;
         return div.innerHTML;
+    }
+    // --- Charts Section ---
+
+    const ctxPassFail = document.getElementById('passFailChart').getContext('2d');
+    const ctxTimeTrend = document.getElementById('timeTrendChart').getContext('2d');
+
+    // Pie Chart: Pass vs Fail
+    const passFailChart = new Chart(ctxPassFail, {
+        type: 'doughnut',
+        data: {
+            labels: ['Pass', 'Fail'],
+            datasets: [{
+                data: [0, 0],
+                backgroundColor: ['#10b981', '#ef4444'],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: { color: '#94a3b8' }
+                }
+            }
+        }
+    });
+
+    // Line Chart: Time Trend
+    const timeTrendChart = new Chart(ctxTimeTrend, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [
+                {
+                    label: 'Duration (s)',
+                    data: [],
+                    borderColor: '#6366f1',
+                    backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                    tension: 0.3,
+                    fill: true
+                },
+                {
+                    label: 'Average',
+                    data: [],
+                    borderColor: '#fbbf24', // Amber
+                    borderDash: [5, 5],
+                    pointRadius: 0,
+                    borderWidth: 2,
+                    fill: false
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: { color: 'rgba(148, 163, 184, 0.1)' },
+                    ticks: { color: '#94a3b8' }
+                },
+                x: {
+                    grid: { display: false },
+                    ticks: { color: '#94a3b8' }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: { color: '#94a3b8' }
+                }
+            }
+        }
+    });
+
+    function updateCharts() {
+        // Update Pass/Fail Chart
+        const passCount = attempts.filter(a => a.isCorrect).length;
+        const failCount = attempts.filter(a => !a.isCorrect).length;
+        passFailChart.data.datasets[0].data = [passCount, failCount];
+        passFailChart.update();
+
+        // Update Time Trend Chart
+        const labels = attempts.map((_, index) => `Attempt ${index + 1}`);
+        const durations = attempts.map(a => a.duration);
+
+        // Calculate average
+        const totalDuration = durations.reduce((sum, d) => sum + d, 0);
+        const avgDuration = durations.length > 0 ? totalDuration / durations.length : 0;
+        const avgData = Array(durations.length).fill(avgDuration);
+
+        timeTrendChart.data.labels = labels;
+        timeTrendChart.data.datasets[0].data = durations;
+        timeTrendChart.data.datasets[1].data = avgData;
+        timeTrendChart.update();
     }
 });

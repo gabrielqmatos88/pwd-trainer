@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let startTime = null;
     let timerInterval = null;
     let isTiming = false;
+    let attempts = []; // Store attempt objects: { duration, isCorrect }
 
     // DOM Elements
     const targetInput = document.getElementById('target-password');
@@ -19,6 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const attemptsList = document.getElementById('attempts-list');
     const clearHistoryBtn = document.getElementById('clear-history-btn');
     const bestTimeDisplay = document.getElementById('best-time-display');
+
+    const avgCorrectDisplay = document.getElementById('avg-correct');
+    const avgWrongDisplay = document.getElementById('avg-wrong');
+    const avgAllDisplay = document.getElementById('avg-all');
 
     let bestTime = Infinity;
 
@@ -130,6 +135,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const duration = (Date.now() - startTime) / 1000;
         const isCorrect = attemptText === targetPassword;
 
+        attempts.push({ duration, isCorrect });
+        updateStats();
+
         addAttemptToHistory(attemptText, duration, isCorrect);
 
         // Feedback
@@ -226,7 +234,35 @@ document.addEventListener('DOMContentLoaded', () => {
         attemptsList.innerHTML = '<li class="empty-state">No attempts yet. Start practicing!</li>';
         bestTime = Infinity;
         bestTimeDisplay.textContent = '--';
+        attempts = [];
+        updateStats();
     });
+
+    function updateStats() {
+        if (attempts.length === 0) {
+            avgCorrectDisplay.textContent = '--';
+            avgWrongDisplay.textContent = '--';
+            avgAllDisplay.textContent = '--';
+            return;
+        }
+
+        const correctAttempts = attempts.filter(a => a.isCorrect);
+        const wrongAttempts = attempts.filter(a => !a.isCorrect);
+
+        const avgCorrect = correctAttempts.length > 0
+            ? (correctAttempts.reduce((sum, a) => sum + a.duration, 0) / correctAttempts.length).toFixed(2) + 's'
+            : '--';
+
+        const avgWrong = wrongAttempts.length > 0
+            ? (wrongAttempts.reduce((sum, a) => sum + a.duration, 0) / wrongAttempts.length).toFixed(2) + 's'
+            : '--';
+
+        const avgAll = (attempts.reduce((sum, a) => sum + a.duration, 0) / attempts.length).toFixed(2) + 's';
+
+        avgCorrectDisplay.textContent = avgCorrect;
+        avgWrongDisplay.textContent = avgWrong;
+        avgAllDisplay.textContent = avgAll;
+    }
 
     // Utility to prevent XSS in history
     function escapeHtml(text) {
